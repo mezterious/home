@@ -1,0 +1,20 @@
+# 
+# .ackrc
+#
+
+# Output
+--group
+
+# Always sort
+--sort-files
+
+# Ignore case if pattern contains no upper case
+--smart-case
+
+# Always colour
+--color
+
+# Configure output
+--color-filename=magenta
+--color-lineno=cyan
+--color-match=black on_cyan

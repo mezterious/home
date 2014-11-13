@@ -1,0 +1,46 @@
+#
+# screenrc
+#
+
+# Turn off the splash screen
+startup_message off
+
+# Make the escape/command character Control-z
+escape ``
+
+# Autodetach session on hangup instead of terminating screen completely
+autodetach on
+
+# Specify scrollback buffer
+defscrollback 30000 
+
+# Enable scrolling
+termcapinfo xterm ti@:te@
+
+# Use 256 color
+term xterm-256color
+
+# Run in UTF-8 mode
+defutf8 on
+
+# Set alternate screen support. This means that exiting things like vim
+# will restore display instead of leaving vim in place
+altscreen on
+
+# Get session name. This will display in the hardstatus line where %id` is specified
+backtick 101 0 0 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*"'
+
+# http://www.gnu.org/software/screen/manual/html_node/String-Escapes.html#String-Escapes
+# Display things like current window, date/time, hostname, session name down the bottom
+hardstatus on
+hardstatus alwayslastline 
+hardstatus string '%{= MW}%{Yk}%101`@%H%{-} %= %-w %{WM}[%n %t %f]%{-} %+w %-= %{bW}%D %d %M %Y %{ck}%c%{-}'
+
+# Set log file name
+#logfile ${HOME}/.screenlog/%n.%t.%Y-%m-%d.%c:%s
+
+# Set timestamp after period of inactivity
+logtstamp on
+
+# Format timestamp
+logtstamp string '-- %n:%t -- time-stamp -- %Y/%M/%d %c:%s --\n'
