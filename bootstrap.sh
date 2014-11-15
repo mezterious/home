@@ -23,14 +23,11 @@ END
 }
 
 # Parse options
-while getopts "t:b:h" option
+while getopts "t:h" option
 do
     case "${option}" in
         t)
             action=${OPTARG}
-            ;;
-        b)
-            backup_dir=${OPTARG}
             ;;
         *)
             usage
@@ -38,17 +35,17 @@ do
     esac
 done
 
+source_dir_absolute=$(cd $(dirname $0) && pwd)
+source_dir_relative=".${source_dir_absolute#${HOME}}"    # get source directory relative to $HOME
+
 case "${action}" in
     copy)
         #   Copy configuration files to $HOME
 
-        # TODO
+        rsync -avzh --progress --exclude '.git' --exclude 'bootstrap.sh' --exclude 'README*' ${source_dir_absolute}/ ${HOME}
         ;;
     link)
         #   Link configuration files in $HOME
-
-        source_dir_absolute=$(cd $(dirname $0) && pwd)
-        source_dir_relative=".${source_dir_absolute#${HOME}}"    # get source directory relative to $HOME
 
         # Only link dot files
         for file in $( find ${source_dir_absolute} -type f -name '.*' -maxdepth 1)
