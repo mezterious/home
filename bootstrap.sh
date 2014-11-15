@@ -42,7 +42,7 @@ case "${action}" in
     copy)
         #   Copy configuration files to $HOME
 
-        rsync -avzh --progress --exclude '.git' --exclude 'bootstrap.sh' --exclude 'README*' ${source_dir_absolute}/ ${HOME}
+        rsync -avzh --progress --exclude '.git*' --exclude 'bootstrap.sh' --exclude 'README*' ${source_dir_absolute}/ ${HOME}
         ;;
     link)
         #   Link configuration files in $HOME
