@@ -56,8 +56,13 @@ case "${action}" in
                 continue;
             fi
 
+            base_file_name="$(basename ${file})"
+
+            #   Remove file/directory from $HOME if it exists
+            rm -rf ${HOME}/${base_file_name}
+
             #   Create the symbolic link in the $HOME directory
-            ln -sfv "${source_dir_relative}/$(basename ${file})" ${HOME}
+            ln -sv ${source_dir_relative}/${base_file_name} ${HOME}
         done
         ;;
     *)
@@ -67,5 +72,8 @@ case "${action}" in
 esac
 
 # Reload bash
-source ${HOME}/.bash_profile
+if [ -f "${HOME}/.bash_profile" ]
+then
+    source ${HOME}/.bash_profile
+fi
 
