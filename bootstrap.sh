@@ -47,9 +47,15 @@ case "${action}" in
     link)
         #   Link configuration files in $HOME
 
-        # Only link dot files
-        for file in $( find ${source_dir_absolute} -type f -name '.*' -maxdepth 1)
+        #   Find files to link. Don't include current script and README and don't descend into directories
+        for file in $(find ${source_dir_absolute} -maxdepth 1 ! -name '.git' ! -name $(basename $0) ! -name 'README*')
         do
+            if [ "${file}" == "${source_dir_absolute}" ]
+            then
+                #   Skip home directory
+                continue;
+            fi
+
             #   Create the symbolic link in the $HOME directory
             ln -sfv "${source_dir_relative}/$(basename ${file})" ${HOME}
         done

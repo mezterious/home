@@ -34,10 +34,10 @@ backtick 101 0 0 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*"'
 # Display things like current window, date/time, hostname, session name down the bottom
 hardstatus on
 hardstatus alwayslastline 
-hardstatus string '%{= MW}%{Yk}%101`@%H%{-} %= %-w %{WM}[%n %t %f]%{-} %+w %-= %{bW}%D %d %M %Y %{ck}%c%{-}'
+hardstatus string '%{= mw}%101`@%H %= %-w %{wm}[%n %t %f]%{-} %+w %-= %D %d %M %Y %c'
 
 # Set log file name
-#logfile ${HOME}/.screenlog/%n.%t.%Y-%m-%d.%c:%s
+logfile ${HOME}/.screen.d/log/%101`.%n.%t.%Y-%m-%d.%c
 
 # Set timestamp after period of inactivity
 logtstamp on
