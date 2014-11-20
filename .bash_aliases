@@ -2,21 +2,12 @@
 # Bash Aliases
 #
 
-# Handle different OSs
-case "${OSTYPE}" in
-    "darwin"*)  # Mac
-        alias ls='ls -G'             # Color ls output
-        ;;
-    *)  # Default
-        alias ls='ls --color=auto'   # Color ls output
-        ;;    
-esac
-
 # File/Directory manipulations
 alias cp='cp -iv'               #  Prompt before copying files
 alias mv='mv -iv'               #  Prompt before moving files
 alias rm='rm -iv'               #  Prompt before removing files
 alias mkdir='mkdir -pv'         #  Create the directory if it does not exist
+alias ls='ls -G'                #  Color ls output
 alias l='ls -al'                #  List all files, including dot files
 
 # Move around better
@@ -37,3 +28,7 @@ alias path="echo $PATH | tr ':' '\n'" #  Show path on separate lines
 
 # CPAN
 alias mcpan='sudo perl -MCPAN -e shell'
+
+# Screen
+alias scrdev='screen -c ${HOME}/.screen.d/rc/.screenrc.dev'
+

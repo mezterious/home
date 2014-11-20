@@ -37,12 +37,13 @@ done
 
 source_dir_absolute=$(cd $(dirname $0) && pwd)
 source_dir_relative=".${source_dir_absolute#${HOME}}"    # get source directory relative to $HOME
+backup_dir=${HOME}/home-backup-$(date +"%Y%m%d%H%M%S")
 
 case "${action}" in
     copy)
         #   Copy configuration files to $HOME
 
-        rsync -avzh --progress --exclude '.git*' --exclude 'bootstrap.sh' --exclude 'README*' ${source_dir_absolute}/ ${HOME}
+        rsync -avzh --progress --exclude '.git*' --exclude 'bootstrap.sh' --exclude 'README*' ${source_dir_absolute}/ ${HOME} --backup --backup-dir=${backup_dir}
         ;;
     link)
         #   Link configuration files in $HOME
@@ -58,8 +59,13 @@ case "${action}" in
 
             base_file_name="$(basename ${file})"
 
-            #   Remove file/directory from $HOME if it exists
-            rm -rf ${HOME}/${base_file_name}
+            #   Backup the existing file
+            if [ ! -d "${backup_dir}" ]
+            then
+                mkdir ${backup_dir}
+            fi
+
+            mv ${HOME}/${base_file_name} ${backup_dir}
 
             #   Create the symbolic link in the $HOME directory
             ln -sv ${source_dir_relative}/${base_file_name} ${HOME}
@@ -70,10 +76,3 @@ case "${action}" in
         exit 1
         ;;
 esac
-
-# Reload bash
-if [ -f "${HOME}/.bash_profile" ]
-then
-    source ${HOME}/.bash_profile
-fi
-
