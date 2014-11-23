@@ -5,74 +5,45 @@
 # and scripts
 #
 
-function usage() {
-    cat << END
-
-USAGE
-
-    $0 -t <copy|link>
-
-DESCRIPTION
-
-    -t copy        -- Copy files to the home directory.
-    -t link        -- Create a symlink in the home directory instead. The symbolic link is a relative path.
-
-END
-
-    exit 1
-}
-
-# Parse options
-while getopts "t:h" option
-do
-    case "${option}" in
-        t)
-            action=${OPTARG}
-            ;;
-        *)
-            usage
-            ;;
-    esac
-done
-
 source_dir_absolute=$(cd $(dirname $0) && pwd)
 source_dir_relative=".${source_dir_absolute#${HOME}}"    # get source directory relative to $HOME
 backup_dir=${HOME}/home-backup-$(date +"%Y%m%d%H%M%S")
 
-case "${action}" in
-    copy)
-        #   Copy configuration files to $HOME
+#   Find files to link. Don't include current script and README and don't descend into directories
+for file in $(find ${source_dir_absolute} -maxdepth 1 ! -name '.git' ! -name $(basename $0) ! -name 'README*')
+do
+    #   Skip home directory
+    if [ "${file}" == "${source_dir_absolute}" ]
+    then
+        continue;
+    fi
 
-        rsync -avzh --progress --exclude '.git*' --exclude 'bootstrap.sh' --exclude 'README*' ${source_dir_absolute}/ ${HOME} --backup --backup-dir=${backup_dir}
-        ;;
-    link)
-        #   Link configuration files in $HOME
+    base_file_name="$(basename ${file})"
+    source_file_name="${source_dir_relative}/${base_file_name}"     # Relative path name to the file
+    home_file_name=${HOME}/${base_file_name}  # Full path name
 
-        #   Find files to link. Don't include current script and README and don't descend into directories
-        for file in $(find ${source_dir_absolute} -maxdepth 1 ! -name '.git' ! -name $(basename $0) ! -name 'README*')
-        do
-            if [ "${file}" == "${source_dir_absolute}" ]
-            then
-                #   Skip home directory
-                continue;
-            fi
+    #   Skip if file exists and is already symbolically linked to the repo
+    if [ -L "${home_file_name}" -a "$(readlink ${home_file_name})" == "${source_file_name}" ]
+    then
+        continue;
+    fi
 
-            base_file_name="$(basename ${file})"
+    #   Backup existing file
+    if [ -f "${home_file_name}" ]
+    then
+        echo "File '${home_file_name}' already exists. Backing it up now."
 
-            #   Backup the existing file
-            if [ ! -d "${backup_dir}" ]
-            then
-                mkdir ${backup_dir}
-            fi
+        if [ ! -d "${backup_dir}" ]
+        then
+            mkdir -v ${backup_dir}
+        fi
 
-            mv ${HOME}/${base_file_name} ${backup_dir}
+        mv -v ${home_file_name} ${backup_dir}
 
-            #   Create the symbolic link in the $HOME directory
-            ln -sv ${source_dir_relative}/${base_file_name} ${HOME}
-        done
-        ;;
-    *)
-        echo "Aborted. Unknown or missing option/argument. Check usage."
-        exit 1
-        ;;
-esac
+        echo "Backup complete."
+    fi
+
+    echo -n "Creating symbolic link: "
+    #   Create the symlink
+    ln -sfv ${source_file_name} ${HOME}
+done
