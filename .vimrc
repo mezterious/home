@@ -124,6 +124,7 @@ set smartindent
 " Use smart indenting for perl and js
 autocmd FileType perl setlocal smartindent
 autocmd FileType javascript setlocal smartindent
+autocmd Filetype ruby setlocal tabstop=2 shiftwidth=2
 
 " Toggle between 'paste' and 'nopaste'
 set pastetoggle=<F3>
