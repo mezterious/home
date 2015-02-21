@@ -1,9 +1,18 @@
-# 
+#
 #  .bashrc
 #
 
+#  Load Homebrew's bash completion
+if [ -d /usr/local/etc/bash_completion.d ]
+then
+    for file in /usr/local/etc/bash_completion.d/*
+    do
+        . $file
+    done
+fi
+
 #  Prompt
-export PS1="[\u@\h \w]$ "
+export PS1="[\u@\h \w\$(__git_ps1)]$ "
 
 #  Path
 export PATH=/usr/local/bin:${PATH}:${HOME}/bin
