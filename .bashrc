@@ -27,11 +27,13 @@ then
     . ~/.bash_colors
 fi
 
-#  Show git state
+#  Git command prompt configurations
 export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWCOLORHINTS=1
 
-#  Prompt
-export PS1="${Purple}[\u@\h \w${Yellow}\$(__git_ps1)${Purple}]$ ${Color_Off}"
+#   Need to use PROMPT_COMMAND in combination with GIT_PS1_SHOWCOLORHINTS to show colors in prompt
+#   Will override PS1
+PROMPT_COMMAND="__git_ps1 '${Purple}[\u@\h \w]' '${Purple}\\$ ${Color_Off}' '${Yellow}[%s${Yellow}]' "
 
 #  Path
 export PATH=/usr/local/bin:${PATH}:${HOME}/bin
