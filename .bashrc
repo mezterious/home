@@ -11,15 +11,6 @@ then
     done
 fi
 
-#  Prompt
-export PS1="[\u@\h \w\$(__git_ps1)]$ "
-
-#  Path
-export PATH=/usr/local/bin:${PATH}:${HOME}/bin
-
-#  Default Editor
-export EDITOR='/usr/bin/vim'
-
 # Load shell dot files
 if [ -f ~/.bash_aliases ]
 then
@@ -30,6 +21,23 @@ if [ -f ~/.bash_functions ]
 then
     . ~/.bash_functions
 fi
+
+if [ -f ~/.bash_colors ]
+then
+    . ~/.bash_colors
+fi
+
+#  Show git state
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+#  Prompt
+export PS1="${Purple}[\u@\h \w${Yellow}\$(__git_ps1)${Purple}]$ ${Color_Off}"
+
+#  Path
+export PATH=/usr/local/bin:${PATH}:${HOME}/bin
+
+#  Default Editor
+export EDITOR='/usr/bin/vim'
 
 #
 # Homebrew and rbenv

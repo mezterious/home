@@ -1,5 +1,5 @@
 #
-# screenrc for development
+# screenrc for rails development
 #
 
 #   Load default rc
@@ -12,8 +12,10 @@ hardstatus string '%{= MW}%101`@%H %= %-w %{WM}[%n %t %f]%{-} %+w %-= %D %d %M %
 screen -t vim 1
 screen -t git 2
 screen -t bash 3
-screen -t logs 4
-screen -t server 5
+screen -t bundle 4
+screen -t console 5
+screen -t server 6
 
 #   Start screens at number 1
 select 1
+
