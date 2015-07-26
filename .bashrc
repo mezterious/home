@@ -33,7 +33,7 @@ export GIT_PS1_SHOWCOLORHINTS=1
 
 #   Need to use PROMPT_COMMAND in combination with GIT_PS1_SHOWCOLORHINTS to show colors in prompt
 #   Will override PS1
-PROMPT_COMMAND="__git_ps1 '${Purple}[\u@\h \w]' '${Purple}\\$ ${Color_Off}' '${Yellow}[%s${Yellow}]' "
+PROMPT_COMMAND="__git_ps1 '${Purple}[\u@\h \w]' '${Purple}\\$ ${Color_Off}' '${Green}[%s${Green}]' "
 
 #  Path
 export PATH=/usr/local/bin:${PATH}:${HOME}/bin

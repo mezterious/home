@@ -50,4 +50,8 @@ bind c screen 1
 bind ^c screen 1
 bind 0 select 10
 screen 1
+screen 2
+screen 3
+
+select 1
 
