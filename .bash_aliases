@@ -30,6 +30,5 @@ alias path="echo $PATH | tr ':' '\n'" #  Show path on separate lines
 alias mcpan='sudo perl -MCPAN -e shell'
 
 # Screen
-alias scdev='screen -c ${HOME}/.screen.d/rc/.screenrc.dev'
-alias scrails='screen -c ${HOME}/.screen.d/rc/.screenrc.rails'
-
+alias scdev='screen -c ${HOME}/.screenrc.d/dev'
+alias scrails='screen -c ${HOME}/.screenrc.d/rails'

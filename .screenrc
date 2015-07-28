@@ -37,7 +37,7 @@ hardstatus alwayslastline
 hardstatus string '%{= mw}%101`@%H %= %-w %{wm}[%n %t %f]%{-} %+w %-= %D %d %M %Y %c'
 
 # Set log file name
-logfile ${HOME}/.screen.d/log/%101`.%n.%t.%Y-%m-%d.%c
+logfile ${HOME}/.log/screen/%101`.%n.%t.%Y-%m-%d.%c
 
 # Set timestamp after period of inactivity
 logtstamp on

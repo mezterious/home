@@ -7,7 +7,7 @@
 
 source_dir_absolute=$(cd $(dirname $0) && pwd)
 source_dir_relative=".${source_dir_absolute#${HOME}}"    # get source directory relative to $HOME
-backup_dir=${HOME}/home-backup-$(date +"%Y%m%d%H%M%S")
+backup_dir=${HOME}/.log/backup/$(date +"%Y%m%d%H%M%S")
 
 #   Find files to link. Don't include current script and README and don't descend into directories
 for file in $(find ${source_dir_absolute} -maxdepth 1 ! -name '.git' ! -name $(basename $0) ! -name 'README*')
