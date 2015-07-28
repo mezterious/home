@@ -12,19 +12,12 @@ then
 fi
 
 # Load shell dot files
-if [ -f ~/.bash_aliases ]
+if [ -d ~/.bashrc.d ]
 then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/.bash_functions ]
-then
-    . ~/.bash_functions
-fi
-
-if [ -f ~/.bash_colors ]
-then
-    . ~/.bash_colors
+    for file in $(find -H ~/.bashrc.d -type f)
+    do
+        . ${file}
+    done
 fi
 
 #  Git command prompt configurations
