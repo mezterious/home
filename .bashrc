@@ -7,17 +7,27 @@ if [ -d /usr/local/etc/bash_completion.d ]
 then
     for file in /usr/local/etc/bash_completion.d/*
     do
-        . $file
+        if [ -f ${file} ]
+        then
+            . ${file}
+        fi
     done
+    #   Remove from namespace of our shell
+    unset -v file
 fi
 
 # Load shell dot files
 if [ -d ~/.bashrc.d ]
 then
-    for file in $(find -H ~/.bashrc.d -type f)
+    for file in ~/.bashrc.d/*
     do
-        . ${file}
+        if [ -f ${file} ]
+        then
+            . ${file}
+        fi
     done
+    #   Remove from namespace of our shell
+    unset -v file
 fi
 
 #  Git command prompt configurations
