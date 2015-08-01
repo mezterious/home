@@ -7,7 +7,7 @@ Installation
 ------------
 
 ```
-https://github.com/mezterious/home.git
+git clone https://github.com/mezterious/home.git
 cd home
 ./bootstrap.sh
 source ~/.bash_profile
@@ -26,9 +26,4 @@ git pull
 ./bootstrap.sh
 source ~/.bash_profile
 ```
-
-Things to Note
---------------
-
-Some vim settings rely on having pathogen and/or other vim plugins.
 
