@@ -32,3 +32,7 @@ alias mcpan='sudo perl -MCPAN -e shell'
 # Screen
 alias scdev='screen -c ${HOME}/.screenrc.d/dev'
 alias scrails='screen -c ${HOME}/.screenrc.d/rails'
+
+# Mac
+alias finder_show_dotfiles='defaults write com.apple.finder AppleShowAllFiles TRUE && killall finder'
+alias finder_hide_dotfiles='defaults write com.apple.finder AppleShowAllFiles FALSE && killall finder'
