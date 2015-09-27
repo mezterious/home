@@ -11,8 +11,9 @@ escape ``
 # Autodetach session on hangup instead of terminating screen completely
 autodetach on
 
-# Specify scrollback buffer
-defscrollback 30000 
+# Specify scrollback buffer. RAM is allocated instantaneously so keep this
+# value small.
+defscrollback 500
 
 # Enable scrolling
 termcapinfo xterm ti@:te@

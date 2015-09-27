@@ -9,11 +9,11 @@ source $HOME/.screenrc
 hardstatus string '%{= MW}%101`@%H %= %-w %{WM}[%n %t %f]%{-} %+w %-= %D %d %M %Y %c'
 
 #   Add windows
-screen -t vim 1
-screen -t git 2
-screen -t watch 3
+screen -t vim     1
+screen -t git     2
+screen -t watch   3
 screen -t console 4
-screen -t server 5
+screen -t server  5
 
 #   Start screens at number 1
 select 1
